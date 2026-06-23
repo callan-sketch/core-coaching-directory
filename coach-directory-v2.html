@@ -42,6 +42,31 @@
     color: var(--navy);
   }
 
+  /* ================= SHARED HEADER (ribbon + nav) ================= */
+  .promo-ribbon { background: var(--terracotta); color: var(--white); }
+  .promo-ribbon a { display: block; text-decoration: none; text-align: center; padding: 9px 16px; font-size: 13.5px; font-weight: 600; }
+  .promo-ribbon a:hover { background: rgba(0,0,0,0.06); }
+  .promo-ribbon strong { font-weight: 700; }
+
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; }
+  .site-logo span { color: var(--terracotta); }
+  .site-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .site-links a { display: block; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 8px; transition: background 0.15s ease, color 0.15s ease; }
+  .site-links a:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+  .site-links a.current { color: var(--white); background: rgba(255,255,255,0.12); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 22px; cursor: pointer; padding: 6px; }
+
+  @media (max-width: 720px) {
+    .nav-toggle { display: block; }
+    .site-links { position: absolute; top: 60px; left: 0; right: 0; background: var(--navy-soft); flex-direction: column; gap: 0; padding: 8px; display: none; }
+    .site-links.open { display: flex; }
+    .site-links a { padding: 12px 14px; }
+    .site-nav { position: relative; }
+  }
+  /* ================= END SHARED HEADER ================= */
+
   /* ---------- Header ---------- */
   .directory-header {
     position: relative;
@@ -460,6 +485,28 @@
 </head>
 <body>
 
+<!-- ================= SHARED HEADER ================= -->
+<div class="promo-ribbon">
+  <a href="membership.html">
+    <strong>R50/month membership</strong> — first 3 months free. Discounted courses included. Join now →
+  </a>
+</div>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="index.html">Core <span>Coaching Hub</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="site-links" id="site-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="coach-directory-v2.html" class="current">Directory</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="membership.html">Membership</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- ================= END SHARED HEADER ================= -->
+
 <header class="directory-header">
   <div class="directory-header-inner">
     <p class="eyebrow">Core Coaching Hub</p>
@@ -762,7 +809,17 @@
   // GO
   // ---------------------------------------------------------------
   loadCoaches();
+
+  document.getElementById('nav-toggle').addEventListener('click', function() {
+    const links = document.getElementById('site-links');
+    const isOpen = links.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+  });
 </script>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,0.55);padding:32px 24px;text-align:center;font-size:13px;">
+  <p>Core Coaching Hub — part of the Core brand family. <a href="mailto:hello@corecoachinghub.co.za" style="color:rgba(255,255,255,0.75);text-decoration:none;">hello@corecoachinghub.co.za</a></p>
+</footer>
 
 </body>
 </html>
