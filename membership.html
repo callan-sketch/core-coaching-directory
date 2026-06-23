@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Coaching Hub — Membership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1b2a3a;
+    --navy-soft: #25394d;
+    --teal: #3a8a8c;
+    --teal-soft: #e8f2f2;
+    --terracotta: #d9764a;
+    --terracotta-soft: #fbe8dd;
+    --cream: #f7f5f1;
+    --ink: #2a2f35;
+    --ink-mute: #6b7480;
+    --line: #e2e0da;
+    --white: #ffffff;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: inherit; }
+
+  /* ================= SHARED HEADER ================= */
+  .promo-ribbon { background: var(--terracotta); color: var(--white); }
+  .promo-ribbon a { display: block; text-decoration: none; text-align: center; padding: 9px 16px; font-size: 13.5px; font-weight: 600; }
+  .promo-ribbon a:hover { background: rgba(0,0,0,0.06); }
+  .promo-ribbon strong { font-weight: 700; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; }
+  .site-logo span { color: var(--terracotta); }
+  .site-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .site-links a { display: block; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 8px; transition: background 0.15s ease, color 0.15s ease; }
+  .site-links a:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+  .site-links a.current { color: var(--white); background: rgba(255,255,255,0.12); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 22px; cursor: pointer; padding: 6px; }
+  @media (max-width: 720px) {
+    .nav-toggle { display: block; }
+    .site-links { position: absolute; top: 60px; left: 0; right: 0; background: var(--navy-soft); flex-direction: column; gap: 0; padding: 8px; display: none; }
+    .site-links.open { display: flex; }
+    .site-links a { padding: 12px 14px; }
+    .site-nav { position: relative; }
+  }
+  /* ================= END SHARED HEADER ================= */
+
+  /* ---------- Construction ---------- */
+  .construction {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .construction-inner { max-width: 520px; }
+
+  .construction-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .construction-inner h1 {
+    font-size: clamp(28px, 4vw, 36px);
+    margin: 0 0 14px;
+  }
+
+  .construction-inner p {
+    color: var(--ink-mute);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 36px;
+  }
+
+  .quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+
+  .quick-links p {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 8px;
+  }
+
+  .quick-links a {
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .quick-links a:last-child { border-bottom: none; }
+  .quick-links a:hover { color: var(--teal); }
+
+  .coming-soon-badge {
+    display: inline-block;
+    background: var(--terracotta-soft);
+    color: #a6502a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px; }
+  .site-footer a { color: rgba(255,255,255,0.75); text-decoration: none; }
+  .site-footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ================= SHARED HEADER ================= -->
+<div class="promo-ribbon">
+  <a href="membership.html">
+    <strong>R50/month membership</strong> — first 3 months free. Discounted courses included. Join now →
+  </a>
+</div>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="index.html">Core <span>Coaching Hub</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="site-links" id="site-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="coach-directory-v2.html">Directory</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="membership.html" class="current">Membership</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- ================= END SHARED HEADER ================= -->
+
+<div class="construction">
+  <div class="construction-inner">
+    <span class="construction-icon">🔧</span>
+    <h1>Membership is coming soon</h1>
+    <p>We're setting up the membership sign-up and payment flow. Check back shortly — or explore what's already live below while you wait.</p>
+
+    <div class="quick-links">
+      <p>Explore the hub</p>
+      <a href="index.html">🏠 Home — what Core Coaching Hub is all about</a>
+      <a href="coach-directory-v2.html">📋 Coach Directory — browse approved SA climbing coaches</a>
+      <a href="courses.html">📚 Courses — the Climbing Coaches Fundamentals Course</a>
+    </div>
+
+    <span class="coming-soon-badge">R50/month · First 3 months free · Coming soon</span>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Core Coaching Hub — part of the Core brand family. <a href="mailto:hello@corecoachinghub.co.za">hello@corecoachinghub.co.za</a></p>
+</footer>
+
+<script>
+  document.getElementById('nav-toggle').addEventListener('click', function() {
+    const links = document.getElementById('site-links');
+    const isOpen = links.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+  });
+</script>
+</body>
+</html>
