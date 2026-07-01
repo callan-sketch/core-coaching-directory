@@ -287,6 +287,34 @@
   .tag-discipline { background: var(--terracotta-soft); color: #a6502a; }
   .tag-age { background: var(--teal-soft); color: #205c5d; }
 
+  .avail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .avail-yes { background: #d4f0e0; color: #1a6b3c; }
+  .avail-limited { background: #fff3cd; color: #7a5500; }
+  .avail-no { background: #f0f0f0; color: #6b7480; }
+
+  .availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .avail-yes { background: #d4f0e0; color: #1a6b3c; }
+  .avail-limited { background: #fff3cd; color: #7d5a00; }
+  .avail-no { background: #f0f0f0; color: #6b7480; }
+
   /* ---------- Empty state ---------- */
   .empty-state {
     max-width: 1100px;
@@ -674,6 +702,16 @@
       const ageTags = (coach.ageGroups || []).map(a =>
         `<span class="tag tag-age">${escapeHtml(a)}</span>`).join('');
 
+      const availText = coach.availability || '';
+      let availBadge = '';
+      if (availText === 'Yes') {
+        availBadge = `<span class="avail-badge avail-yes">● Available</span>`;
+      } else if (availText === 'Limited availability') {
+        availBadge = `<span class="avail-badge avail-limited">● Limited</span>`;
+      } else if (availText === 'No') {
+        availBadge = `<span class="avail-badge avail-no">● Full</span>`;
+      }
+
       card.innerHTML = `
         <div class="coach-photo-wrap">
           <img src="${escapeHtml(coach.photoUrl)}" alt="Photo of ${escapeHtml(coach.coachName)}" loading="lazy">
@@ -682,7 +720,7 @@
         <div class="coach-card-body">
           <h3>${escapeHtml(coach.coachName)}</h3>
           <p class="coach-gyms">${escapeHtml(gymsPreview || 'Gym not specified')}</p>
-          <div class="tag-row">${disciplineTags}${ageTags}</div>
+          <div class="tag-row">${disciplineTags}${ageTags}${availBadge}</div>
         </div>
       `;
 
@@ -703,9 +741,20 @@
     const pills = (arr, cls = 'pill') =>
       (arr || []).map(v => `<span class="${cls}">${escapeHtml(v)}</span>`).join('') || '<span class="pill">—</span>';
 
+    const availText = coach.availability || '';
+    let availBadge = '';
+    if (availText === 'Yes') {
+      availBadge = `<span class="avail-badge avail-yes">● Available for new athletes</span>`;
+    } else if (availText === 'Limited availability') {
+      availBadge = `<span class="avail-badge avail-limited">● Limited availability</span>`;
+    } else if (availText === 'No') {
+      availBadge = `<span class="avail-badge avail-no">● Not taking new athletes</span>`;
+    }
+
     document.getElementById('modal-body').innerHTML = `
       <div>
         <p class="modal-section-label">Contact</p>
+        ${availBadge ? `<div style="margin-bottom:10px;">${availBadge}</div>` : ''}
         <div class="contact-row">
           <a href="mailto:${escapeHtml(coach.email)}">${escapeHtml(coach.email)}</a>
           <a href="tel:${escapeHtml(coach.cellPhone)}">${escapeHtml(coach.cellPhone)}</a>
