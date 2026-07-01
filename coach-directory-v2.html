@@ -472,8 +472,25 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 560px) {
-    .filter-card { flex-direction: column; align-items: stretch; }
-    .clear-filters { align-self: flex-start; }
+    /* Filters: 2-column grid so they sit side by side instead of stacking */
+    .filter-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: end;
+    }
+    .clear-filters {
+      grid-column: 1 / -1;
+      justify-self: start;
+      padding-top: 0;
+    }
+    /* Cards: smaller min so photos don't get clipped on narrow screens */
+    .grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      padding: 0 16px;
+    }
+    .coach-card-body h3 { font-size: 15px; }
     .modal-photo-name { flex-direction: column; align-items: flex-start; gap: 10px; }
     .modal-photo { width: 72px; height: 72px; }
   }
